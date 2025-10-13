@@ -28,9 +28,10 @@ public class CachingBreedFetcher implements BreedFetcher {
             return cache.get(breed);
         }
 
+        callsMade++;
+
         try {
             List<String> result = fetcher.getSubBreeds(breed);
-            callsMade++;
             cache.put(breed, result);
             return result;
         } catch (BreedNotFoundException e) {
@@ -42,14 +43,5 @@ public class CachingBreedFetcher implements BreedFetcher {
         return callsMade;
     }
 
-    public static void main(String[] args) {
-        BreedFetcher apiFetcher = new DogApiBreedFetcher();
-        CachingBreedFetcher cachingFetcher = new CachingBreedFetcher(apiFetcher);
 
-        System.out.println(cachingFetcher.getSubBreeds("bulldog"));
-        System.out.println(cachingFetcher.getSubBreeds("hound")); // should use cache
-
-        System.out.println("Calls made: " + cachingFetcher.getCallsMade());
-
-    }
 }
