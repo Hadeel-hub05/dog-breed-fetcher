@@ -18,6 +18,8 @@ class MainTest {
         BreedFetcherForLocalTesting mock = new BreedFetcherForLocalTesting();
 
         assertEquals(-1, Main.getNumberOfSubBreeds("cat", mock));
+
+        //fixed
     }
 
     @Test
